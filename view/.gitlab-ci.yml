@@ -1,0 +1,18 @@
+image: node:alpine
+
+variables:
+    PUBLIC_URL: public/
+
+stages:
+    - deploy
+
+pages:
+    stage: deploy
+    script:
+        - yarn
+        - CI=true yarn build
+    artifacts:
+        paths:
+            - public
+    only:
+        - master

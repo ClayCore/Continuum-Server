@@ -1,0 +1,51 @@
+{
+    "name": "continuum-admin",
+    "version": "0.1.0-alpha1",
+    "homepage": "https://continuum-server.herokuapp.com/admin",
+    "private": true,
+    "dependencies": {
+        "@fortawesome/fontawesome-svg-core": "1.2.30",
+        "@fortawesome/free-solid-svg-icons": "5.15.1",
+        "@fortawesome/react-fontawesome": "0.1.12",
+        "@ionic/react": "^5.5.1",
+        "@types/node": "12.12.2",
+        "@types/react": "16.8.24",
+        "@types/react-dom": "16.9.9",
+        "@types/react-fontawesome": "1.6.4",
+        "@types/react-router-dom": "5.1.6",
+        "eslint": "7.10.0",
+        "eslint-plugin-prettier": "3.1.4",
+        "ionicons": "5.2.3",
+        "parcel-bundler": "1.12.4",
+        "prettier": "2.1.2",
+        "prettier-eslint": "11.0.0",
+        "react": "^16.8.6",
+        "react-dom": "^16.8.6",
+        "react-router-dom": "5.2.0",
+        "sass": "1.26.11",
+        "typescript": "3.4.3"
+    },
+    "engines": {
+        "node": ">= 12.14.1",
+        "yarn": ">= 1.12.4"
+    },
+    "eslintConfig": {
+        "extends": "react-app"
+    },
+    "browsersList": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
+    "scripts": {
+        "start": "parcel --no-autoinstall src/index.html --public-url / --out-dir build/debug",
+        "build": "parcel build src/index.html --public-url / --out-dir public/"
+    }
+}
