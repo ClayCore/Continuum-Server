@@ -1,10 +1,10 @@
 import app from './app';
+import http from 'http';
 
-const server = app.listen(app.get('server_port'), () => {
-    console.log(
-        `ContinuumServer now running at ${app.get('origin_uri')}:${app.get('server_port')} in ${app.get('env')} mod`
-    );
-    console.log('\tPress CTRL-C to stop\n');
-});
+const server = http.createServer(app).listen(
+    app.get('server_port', function () {
+        console.log('Server succesfully created.');
+    })
+);
 
 export default server;

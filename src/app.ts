@@ -9,11 +9,11 @@ import mongo from 'connect-mongo';
 import mongoose from 'mongoose';
 import passport from 'passport';
 import session from 'express-session';
-
-const CORS_WHITELIST = ['https://continuum-server.herokuapp.com:80', 'https://localhost:3000'];
+import { CORS_WHITELIST } from './utils/hostUrls';
+import { MONGODB_URI, SESSION_SECRET, SERVER_PORT, ORIGIN_URI } from './utils/secrets';
 
 const MongoStore = mongo(session);
-const mongoUrl: string = process.env.MONGODB_URI as string;
+const mongoUrl: string = MONGODB_URI as string;
 (<any>mongoose).Promise = bluebird;
 
 mongoose.set('useNewUrlParser', true);
@@ -35,8 +35,8 @@ mongoose
 const app = express();
 
 // TODO: replace these with constants
-app.set('server_port', process.env.PORT || 3000);
-app.set('origin_uri', 'https://continuum-server.herokuapp.com');
+app.set('server_port', SERVER_PORT);
+app.set('origin_uri', ORIGIN_URI);
 
 app.use(compression());
 app.use(
@@ -60,7 +60,7 @@ app.use(
     session({
         resave: true,
         saveUninitialized: true,
-        secret: process.env.SESSION_SECRET as string,
+        secret: SESSION_SECRET as string,
         store: new MongoStore({
             url: mongoUrl,
             autoReconnect: true,
