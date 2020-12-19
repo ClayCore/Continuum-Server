@@ -34,7 +34,6 @@ mongoose
 
 const app = express();
 
-// TODO: replace these with constants
 app.set('server_port', SERVER_PORT);
 app.set('origin_uri', ORIGIN_URI);
 

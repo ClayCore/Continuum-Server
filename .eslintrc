@@ -19,6 +19,9 @@
     },
     "settings": {
         "import/resolver": {
+            "alias": {
+                "map": ["~", "./src/"]
+            },
             "typescript": {
                 "alwaysTryTypes": true
             }
