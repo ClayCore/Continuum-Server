@@ -11,12 +11,12 @@ const normalizePort = (port: number): number => {
 
 export const HOSTNAME_DEV: string = 'http://localhost';
 export const HOSTNAME_ANDROID_LOCAL: string = 'http://10.0.2.2';
-export const HOSTPORT_DEV: number = normalizePort(3000);
-export const SERVERPORT_DEV: number = normalizePort(3001);
+export const HOSTPORT_DEV: number = 3000;
+export const SERVERPORT_DEV: number = 3001;
 
 export const HOSTURL_DEV: string = `${HOSTNAME_DEV}:${HOSTPORT_DEV}`;
 
-export const HOSTNAME_PROD: string = 'https://continuum-server.herokuapp.com';
+export const HOSTNAME_PROD: string = '0.0.0.0';
 export const HOSTPORT_PROD: number = normalizePort(80);
 export const SERVERPORT_PROD: number = HOSTPORT_PROD;
 
