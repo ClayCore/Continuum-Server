@@ -78,7 +78,7 @@ class App extends React.Component<AppProps, AppState> {
 
         if (is_loading) {
             return (
-                <Router>
+                <Router basename="admin">
                     <Switch>
                         <h1>Loading...</h1>
                     </Switch>
@@ -99,12 +99,12 @@ class App extends React.Component<AppProps, AppState> {
         }
 
         return (
-            <Router>
+            <Router basename="admin">
                 <Switch>
-                    <Route exact path="/admin">
+                    <Route exact path="/">
                         <h1>Welcome to admin panel.</h1>
                     </Route>
-                    <Route path="/admin/home">
+                    <Route path="/home">
                         <h1>Welcome to admin panel.</h1>
                     </Route>
                 </Switch>

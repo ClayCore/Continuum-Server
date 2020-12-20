@@ -1,7 +1,7 @@
 {
     "name": "continuum-admin",
     "version": "0.1.0-alpha1",
-    "homepage": "https://continuum-server.herokuapp.com/admin",
+    "proxy": "http://localhost:5000",
     "private": true,
     "dependencies": {
         "@fortawesome/fontawesome-svg-core": "1.2.30",
