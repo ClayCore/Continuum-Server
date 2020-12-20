@@ -77,7 +77,7 @@ app.use(lusca.xframe('SAMEORIGIN'));
 app.use(lusca.xssProtection(true));
 
 app.use(function (req: Request, res: Response, next: NextFunction) {
-    console.log(`[${req?.method} ${req?.originalUrl}] is called, body is ${JSON.stringify(req?.body)}`);
+    console.log(`[${req.method} ${req.originalUrl}] is called, body is ${JSON.stringify(req.body)}`);
     next();
 });
 
@@ -86,7 +86,41 @@ app.use((req: Request, res: Response, next: NextFunction) => {
     next();
 });
 
-app.use(errorHandler());
+if (process.env.NODE_ENV === 'development') {
+    app.use(errorHandler());
+}
+
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static('./view/public/', { maxAge: 31557600000 }));
+
+    app.use((req: Request, res: Response, next: NextFunction) => {
+        if (
+            req.originalUrl.startsWith('/api') ||
+            req.originalUrl.startsWith('/auth') ||
+            req.originalUrl.startsWith('/oauth2')
+        ) {
+            next();
+        } else {
+            const options = {
+                root: './view/public/',
+                dortfiles: 'deny',
+                header: {
+                    'x-timestamp': Date.now(),
+                    'x-sent': true,
+                },
+            };
+
+            const fileName = 'index.html';
+            res.sendFile(fileName, options, function (err) {
+                if (err) {
+                    next(err);
+                } else {
+                    console.log(`[Sent]: ${fileName}`);
+                }
+            });
+        }
+    });
+}
 
 app.use('/oauth2', oauth2);
 app.use('/auth', auth);
