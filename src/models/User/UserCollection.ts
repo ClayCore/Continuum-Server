@@ -39,14 +39,19 @@ userSchema.pre('save', function save(next: any) {
             return next(err);
         }
 
-        bcrypt.hash(user.password as string, salt, null, (err: mongoose.Error, hash: any) => {
-            if (err) {
-                return next(err);
-            }
+        bcrypt.hash(
+            user.password as string,
+            salt,
+            () => void {},
+            (err: mongoose.Error, hash: any) => {
+                if (err) {
+                    return next(err);
+                }
 
-            user.password = hash;
-            next();
-        });
+                user.password = hash;
+                next();
+            }
+        );
     });
 });
 

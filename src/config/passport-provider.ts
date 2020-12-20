@@ -53,7 +53,7 @@ passport.use(
 function verifyClient(clientId: string, clientSecret: string, done: (error: Error | undefined, user?: any) => void) {
     console.log(`Using [ClientPasswordStrategy]. Using [clientId]:[clientSecret]\n\t[${clientId}]:[${clientSecret}]`);
 
-    const client: Client | undefined = ClientCollection.find((value: Client) => value.id === client.id);
+    const client: Client | undefined = ClientCollection.find((value: Client) => value.id === clientId);
     if (!client || client.secret !== clientSecret) {
         return done(undefined, false);
     }
