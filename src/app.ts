@@ -1,19 +1,21 @@
+import { CORS_WHITELIST } from './utils/hostUrls';
+import { MONGODB_URI, SESSION_SECRET, SERVER_PORT, ORIGIN_URI } from './utils/secrets';
+import { Response, Request, NextFunction } from 'express';
 import bluebird from 'bluebird';
 import compression from 'compression';
 import cors from 'cors';
 import errorHandler from 'errorhandler';
 import express from 'express';
-import { Response, Request, NextFunction } from 'express';
 import lusca from 'lusca';
 import mongo from 'connect-mongo';
 import mongoose from 'mongoose';
 import passport from 'passport';
 import session from 'express-session';
-import { CORS_WHITELIST } from './utils/hostUrls';
-import { MONGODB_URI, SESSION_SECRET, SERVER_PORT, ORIGIN_URI } from './utils/secrets';
 
 import oauth2 from './routes/oauth2';
 import auth from './routes/auth';
+import version from './routes/version';
+
 import './config/passport-consumer';
 
 const MongoStore = mongo(session);
@@ -124,5 +126,6 @@ if (process.env.NODE_ENV === 'production') {
 
 app.use('/oauth2', oauth2);
 app.use('/auth', auth);
+app.use('/api/version', version);
 
 export default app;

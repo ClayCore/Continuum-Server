@@ -2,17 +2,17 @@ import * as React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 // const API_ADDR = 'https://lunarium-api.herokuapp.com/';
-const API_ADDR = 'https://continuum-server.herokuapp.com:8000/';
-const API_GET = API_ADDR + 'api/get';
-const API_PUT = API_ADDR + 'api/put';
-const API_UPDATE = API_ADDR + 'api/update';
-const API_DELETE = API_ADDR + 'api/delete';
+const API_ADDR = 'https://continuum-server.herokuapp.com:3000';
+const API_GET = API_ADDR + '/oauth2/authorize';
+// const API_PUT = API_ADDR + 'api/put';
+// const API_UPDATE = API_ADDR + 'api/update';
+// const API_DELETE = API_ADDR + 'api/delete';
 
 // how often should be poll the database, in ms
 const DB_POLL = 1000;
 
 type AppState = {
-    data: Promise<any> | null;
+    version: Promise<any> | null;
     interval: number;
     is_loading: boolean;
     error: string;
@@ -25,7 +25,7 @@ class App extends React.Component<AppProps, AppState> {
         super(props);
 
         this.state = {
-            data: null,
+            version: null,
             interval: 0,
             is_loading: true,
             error: '',
@@ -35,10 +35,10 @@ class App extends React.Component<AppProps, AppState> {
     fetchData = (url: string) => {
         fetch(url)
             .then((data) => data.json())
-            .then((response) => {
-                this.setState({ data: response.data, is_loading: false });
+            .then((res) => {
+                this.setState({ version: res.version, is_loading: false });
             })
-            .catch((error) => this.setState({ error: error }));
+            .catch((error: Error) => this.setState({ error: error.message }));
     };
 
     getData = () => {
@@ -62,7 +62,7 @@ class App extends React.Component<AppProps, AppState> {
     };
 
     render() {
-        const { data, is_loading, error } = this.state;
+        const { version: data, is_loading, error } = this.state;
 
         if (error) {
             return (
@@ -80,7 +80,9 @@ class App extends React.Component<AppProps, AppState> {
             return (
                 <Router basename="admin">
                     <Switch>
-                        <h1>Loading...</h1>
+                        <Route>
+                            <h1>Loading...</h1>
+                        </Route>
                     </Switch>
                 </Router>
             );
@@ -102,10 +104,10 @@ class App extends React.Component<AppProps, AppState> {
             <Router basename="admin">
                 <Switch>
                     <Route exact path="/">
-                        <h1>Welcome to admin panel.</h1>
+                        <h1>Welcome to admin panel. Version: {data}</h1>
                     </Route>
                     <Route path="/home">
-                        <h1>Welcome to admin panel.</h1>
+                        <h1>Welcome to admin panel. Version: {data}</h1>
                     </Route>
                 </Switch>
             </Router>
