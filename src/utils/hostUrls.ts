@@ -1,12 +1,13 @@
-function normalizePort(port: number): number {
+const normalizePort = (port: number): number => {
     const port_env = process.env.PORT;
+    console.log(`[PORT_ENV]: ${port_env}`);
 
     if (!port_env) {
         return port;
     }
 
     return Number.parseInt(port_env);
-}
+};
 
 export const HOSTNAME_DEV: string = 'http://localhost';
 export const HOSTNAME_ANDROID_LOCAL: string = 'http://10.0.2.2';
