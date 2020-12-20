@@ -103,7 +103,7 @@ if (process.env.NODE_ENV === 'production') {
         } else {
             const options = {
                 root: './view/public/',
-                dortfiles: 'deny',
+                dotfiles: 'deny',
                 header: {
                     'x-timestamp': Date.now(),
                     'x-sent': true,
