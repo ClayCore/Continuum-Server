@@ -2,7 +2,7 @@ import * as React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 // const API_ADDR = 'https://lunarium-api.herokuapp.com/';
-const API_ADDR = 'https://momentum-host.herokuapp.com/';
+const API_ADDR = 'https://continuum-server.herokuapp.com:8000/';
 const API_GET = API_ADDR + 'api/get';
 const API_PUT = API_ADDR + 'api/put';
 const API_UPDATE = API_ADDR + 'api/update';

@@ -99,6 +99,6 @@
         "build-ts": "tsc",
         "serve": "node dist/server.js",
         "start": "yarn build && yarn serve",
-        "heroku-postbuild": "yarn start"
+        "heroku-postbuild": "cd view && yarn install && yarn build"
     }
 }
