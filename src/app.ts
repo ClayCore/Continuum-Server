@@ -12,6 +12,10 @@ import session from 'express-session';
 import { CORS_WHITELIST } from './utils/hostUrls';
 import { MONGODB_URI, SESSION_SECRET, SERVER_PORT, ORIGIN_URI } from './utils/secrets';
 
+import oauth2 from './routes/oauth2';
+import auth from './routes/auth';
+import './config/passport-consumer';
+
 const MongoStore = mongo(session);
 const mongoUrl: string = MONGODB_URI as string;
 (<any>mongoose).Promise = bluebird;
@@ -73,7 +77,7 @@ app.use(lusca.xframe('SAMEORIGIN'));
 app.use(lusca.xssProtection(true));
 
 app.use(function (req: Request, res: Response, next: NextFunction) {
-    console.log(`[${req.method} ${req.originalUrl}] is called, body is ${JSON.stringify(req.body)}`);
+    console.log(`[${req?.method} ${req?.originalUrl}] is called, body is ${JSON.stringify(req?.body)}`);
     next();
 });
 
@@ -83,5 +87,8 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 });
 
 app.use(errorHandler());
+
+app.use('/oauth2', oauth2);
+app.use('/auth', auth);
 
 export default app;

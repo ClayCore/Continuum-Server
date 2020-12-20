@@ -1,10 +1,9 @@
 import app from './app';
-import http from 'http';
 
-const server = http.createServer(app).listen(
-    app.get('server_port', function () {
-        console.log('Server succesfully created.');
-    })
-);
+const server = app.listen(app.get('server_port'), () => {
+    console.log(`\tApp is running at [${app.get('origin_uri')}]:[${app.get('server_port')}] in ${app.get('env')} mod`);
+
+    console.log('\tPress CTRL-C to stop\n');
+});
 
 export default server;
