@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import fetch from './shared/fetch';
 
-// const API_ADDR = 'https://lunarium-api.herokuapp.com/';
-const API_ADDR = 'https://continuum-server.herokuapp.com:3000';
-const API_GET = API_ADDR + '/oauth2/authorize';
+const API_ADDR = 'https://continuum-server.herokuapp.com';
+const API_GET = API_ADDR + '/api/version';
 // const API_PUT = API_ADDR + 'api/put';
 // const API_UPDATE = API_ADDR + 'api/update';
 // const API_DELETE = API_ADDR + 'api/delete';
@@ -33,12 +33,11 @@ class App extends React.Component<AppProps, AppState> {
     }
 
     fetchData = (url: string) => {
-        fetch(url)
-            .then((data) => data.json())
-            .then((res) => {
-                this.setState({ version: res.version, is_loading: false });
-            })
-            .catch((error: Error) => this.setState({ error: error.message }));
+        fetch(url, undefined, 'GET').then((json: any) => {
+            if (json && json.version) {
+                this.setState({ version: json.version });
+            }
+        });
     };
 
     getData = () => {

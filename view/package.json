@@ -13,6 +13,7 @@
         "@types/react-dom": "16.9.9",
         "@types/react-fontawesome": "1.6.4",
         "@types/react-router-dom": "5.1.6",
+        "axios": "0.21.0",
         "eslint": "7.10.0",
         "eslint-plugin-prettier": "3.1.4",
         "ionicons": "5.2.3",
@@ -32,18 +33,9 @@
     "eslintConfig": {
         "extends": "react-app"
     },
-    "browsersList": {
-        "production": [
-            ">0.2%",
-            "not dead",
-            "not op_mini all"
-        ],
-        "development": [
-            "last 1 chrome version",
-            "last 1 firefox version",
-            "last 1 safari version"
-        ]
-    },
+    "browserslist": [
+        "since 2017-06"
+    ],
     "scripts": {
         "start": "parcel --no-autoinstall src/index.html --public-url / --out-dir build/debug",
         "build": "parcel build src/index.html --public-url / --out-dir public/"
