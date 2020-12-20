@@ -23,7 +23,7 @@ import ToastWrapper from './website/components/ToastWrapper';
     }
 
     if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
-        setHostUrl('https://127.0.0.1:3000/');
+        setHostUrl('https://127.0.0.1:3000');
     } else {
         setHostUrl('https://continuum-server.herokuapp.com');
     }

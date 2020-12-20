@@ -3,11 +3,10 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { ComponentProps } from '../shared/ComponentProps';
 import fetch from '../shared/fetch';
 
-const API_ADDR = '';
-const API_GET = API_ADDR + 'api/version';
-// const API_PUT = API_ADDR + 'api/put';
-// const API_UPDATE = API_ADDR + 'api/update';
-// const API_DELETE = API_ADDR + 'api/delete';
+const API_GET = '/api/version';
+// const API_PUT = 'api/put';
+// const API_UPDATE = 'api/update';
+// const API_DELETE = 'api/delete';
 
 // how often should be poll the database, in ms
 const DB_POLL = 1000;
