@@ -2,13 +2,17 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
-import App from './App';
 import { $, _, initFontLibrary } from './utils';
+import { setHostUrl } from './shared/fetch';
 import * as serviceWorker from './serviceWorker';
+import App from './App';
 
 (function () {
     // Determines the padding for loading times, while the DOM is initializing.
     const LOAD_PADDING = 1000;
+
+    // Host server url.
+    const HOST_URL = 'https://continuum-server.herokuapp.com';
 
     // Resolves when the webpage DOM is done loading.
     let onReady = function (callback: Function) {
@@ -22,6 +26,8 @@ import * as serviceWorker from './serviceWorker';
 
     let init = function () {
         window.addEventListener('load', function () {
+            setHostUrl(HOST_URL);
+
             let entry_point = $('#root');
 
             // Initialize font library and master stylesheet

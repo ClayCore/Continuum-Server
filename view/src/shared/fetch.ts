@@ -1,6 +1,7 @@
 import { ACCESS_TOKEN_KEY, RESPONSE_CONTENT_TYPE, INVALID_TOKEN_ERROR } from './constants';
 import sleep from './sleep';
 import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
+import { getStorage as localStorage } from './storage';
 
 export type Method = 'GET' | 'POST' | 'PUT';
 
@@ -32,12 +33,14 @@ const _fetch = async (
         completeUrl = `${getHostUrl()}${url}`;
     }
 
+    console.log(`[FetchAPI]: [CompleteURL: ${completeUrl}]`);
+
     const headers: any = {
         Accept: '*/*',
     };
 
     if (withToken) {
-        const token: string | null = await localStorage.getItem(ACCESS_TOKEN_KEY);
+        const token: string | null = await localStorage().getItem(ACCESS_TOKEN_KEY);
         if (token) {
             headers['Authorization'] = 'Bearer ' + token;
         } else {
