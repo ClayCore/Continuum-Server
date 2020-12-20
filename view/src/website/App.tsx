@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import fetch from './shared/fetch';
+import { ComponentProps } from '../shared/ComponentProps';
+import fetch from '../shared/fetch';
 
-const API_ADDR = 'https://continuum-server.herokuapp.com';
-const API_GET = API_ADDR + '/api/version';
+const API_ADDR = '';
+const API_GET = API_ADDR + 'api/version';
 // const API_PUT = API_ADDR + 'api/put';
 // const API_UPDATE = API_ADDR + 'api/update';
 // const API_DELETE = API_ADDR + 'api/delete';
@@ -18,10 +19,8 @@ type AppState = {
     error: string;
 };
 
-type AppProps = {};
-
-class App extends React.Component<AppProps, AppState> {
-    constructor(props: AppProps) {
+class App extends React.Component<ComponentProps, AppState> {
+    constructor(props: ComponentProps) {
         super(props);
 
         this.state = {
@@ -77,13 +76,11 @@ class App extends React.Component<AppProps, AppState> {
 
         if (is_loading) {
             return (
-                <Router basename="admin">
-                    <Switch>
-                        <Route>
-                            <h1>Loading...</h1>
-                        </Route>
-                    </Switch>
-                </Router>
+                <Switch>
+                    <Route>
+                        <h1>Loading...</h1>
+                    </Route>
+                </Switch>
             );
         }
 
@@ -100,16 +97,14 @@ class App extends React.Component<AppProps, AppState> {
         }
 
         return (
-            <Router basename="admin">
-                <Switch>
-                    <Route exact path="/">
-                        <h1>Welcome to admin panel. Version: {version}</h1>
-                    </Route>
-                    <Route path="/home">
-                        <h1>Welcome to admin panel. Version: {version}</h1>
-                    </Route>
-                </Switch>
-            </Router>
+            <Switch>
+                <Route exact path="/">
+                    <h1>Welcome to admin panel. Version: {version}</h1>
+                </Route>
+                <Route path="/home">
+                    <h1>Welcome to admin panel. Version: {version}</h1>
+                </Route>
+            </Switch>
         );
     }
 }
