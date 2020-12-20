@@ -35,7 +35,7 @@ class App extends React.Component<AppProps, AppState> {
     fetchData = (url: string) => {
         fetch(url, undefined, 'GET').then((json: any) => {
             if (json && json.version) {
-                this.setState({ version: json.version });
+                this.setState({ version: json.version, is_loading: false });
             }
         });
     };
@@ -61,7 +61,7 @@ class App extends React.Component<AppProps, AppState> {
     };
 
     render() {
-        const { version: data, is_loading, error } = this.state;
+        const { version, is_loading, error } = this.state;
 
         if (error) {
             return (
@@ -87,11 +87,11 @@ class App extends React.Component<AppProps, AppState> {
             );
         }
 
-        if (!data) {
+        if (!version) {
             return (
                 <div>
                     <h1>
-                        <code>[ERROR]: Data: {data}</code>
+                        <code>[ERROR]: Version missing</code>
                     </h1>
                     <br />
                     <pre>Data fetched from server is undefined or null!</pre>
@@ -103,10 +103,10 @@ class App extends React.Component<AppProps, AppState> {
             <Router basename="admin">
                 <Switch>
                     <Route exact path="/">
-                        <h1>Welcome to admin panel. Version: {data}</h1>
+                        <h1>Welcome to admin panel. Version: {version}</h1>
                     </Route>
                     <Route path="/home">
-                        <h1>Welcome to admin panel. Version: {data}</h1>
+                        <h1>Welcome to admin panel. Version: {version}</h1>
                     </Route>
                 </Switch>
             </Router>
